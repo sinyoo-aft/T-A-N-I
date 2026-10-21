@@ -1,0 +1,1014 @@
+
+/* =========================================================
+   1. VARIABEL WARNA DAN PENGATURAN DASAR
+   ========================================================= */
+
+/*
+   Variabel CSS menyimpan warna dan nilai yang sering digunakan.
+   Jika ingin mengganti tema website, kamu cukup mengubah bagian ini.
+*/
+:root {
+    --green-dark: #245c3a;
+    --green: #367c4b;
+    --green-light: #e9f4e9;
+
+    --cream: #f8f8f0;
+    --white: #ffffff;
+
+    --text: #26352a;
+    --text-muted: #68766b;
+
+    --border: #dce6dc;
+
+    --warning-bg: #fff4d9;
+    --warning-text: #805c10;
+
+    --radius: 16px;
+    --shadow: 0 5px 20px rgba(31, 73, 43, 0.07);
+}
+
+/*
+   box-sizing: border-box membuat padding dan border
+   ikut dihitung dalam ukuran total suatu elemen.
+*/
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Membuat perpindahan menuju bagian halaman terasa halus. */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+
+/* Gaya dasar seluruh halaman. */
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text);
+    background-color: var(--cream);
+}
+
+/* Menghindari gambar melebihi lebar wadahnya. */
+img {
+    display: block;
+    max-width: 100%;
+}
+
+/* Menghilangkan garis bawah tautan secara default. */
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Menyesuaikan font elemen formulir agar konsisten dengan halaman. */
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+/* Membuat tombol dan tautan bereaksi terhadap klik dengan jelas. */
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Membatasi lebar konten dan membuatnya berada di tengah. */
+.container {
+    width: min(1120px, 92%);
+    margin-inline: auto;
+}
+
+/* =========================================================
+   2. JUDUL DAN TEKS UMUM
+   ========================================================= */
+
+/* Judul bagian yang dipakai pada diagnosis, pustaka, dan fitur lain. */
+.section-heading {
+    margin-bottom: 28px;
+}
+
+.section-heading h2 {
+    margin: 0 0 8px;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    line-height: 1.3;
+    color: var(--green-dark);
+}
+
+.section-heading p {
+    max-width: 680px;
+    margin: 0;
+    color: var(--text-muted);
+}
+
+/* Label kecil di atas judul bagian. */
+.eyebrow {
+    color: var(--green);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/* Menjaga elemen formulir dan bagian hasil tetap mudah dibaca. */
+p,
+li {
+    overflow-wrap: break-word;
+}
+
+::selection {
+    color: var(--green-dark);
+    background-color: var(--green-light);
+}
+
+/* =========================================================
+   3. HEADER DAN NAVIGASI
+   ========================================================= */
+
+/*
+   position: sticky membuat navigasi tetap terlihat
+   ketika pengguna menggulir halaman.
+*/
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    background-color: rgba(255, 255, 255, 0.97);
+    border-bottom: 1px solid var(--border);
+}
+
+/* Menata logo dan menu dalam satu baris. */
+.nav-inner {
+    display: flex;
+    min-height: 76px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+/* Nama website dan ikon tanaman. */
+.brand {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 10px;
+
+    color: var(--green-dark);
+    font-size: 1.25rem;
+    font-weight: 800;
+}
+
+.brand-icon {
+    font-size: 1.8rem;
+    line-height: 1;
+}
+
+/* Daftar menu di bagian atas halaman. */
+.nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 12px 22px;
+}
+
+.nav-links a {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    font-weight: 600;
+
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: var(--green);
+}
+
+/* =========================================================
+   4. TOMBOL
+   ========================================================= */
+
+/*
+   .btn adalah gaya utama.
+   Kelas ini dapat dipakai berulang kali di bagian berbeda.
+*/
+.btn {
+    display: inline-flex;
+    min-height: 46px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 11px 19px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+
+    color: var(--white);
+    background-color: var(--green);
+
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+/* Efek ketika penunjuk berada di atas tombol. */
+.btn:hover {
+    color: var(--white);
+    background-color: var(--green-dark);
+    transform: translateY(-1px);
+}
+
+/* Tombol alternatif dengan latar putih. */
+.btn-secondary {
+    color: var(--green-dark);
+    background-color: var(--white);
+    border-color: var(--border);
+}
+
+.btn-secondary:hover {
+    color: var(--white);
+    border-color: var(--green-dark);
+    background-color: var(--green-dark);
+}
+
+/* Tombol berukuran kecil, misalnya tombol hapus catatan. */
+.btn-small {
+    min-height: 38px;
+    padding: 8px 13px;
+    font-size: 0.9rem;
+}
+
+/* Jarak antara tombol pemeriksaan dan tombol atur ulang. */
+#resetDiagnosis {
+    margin-top: 8px;
+}
+
+/* Jarak antara tombol dan isi formulir kalkulator. */
+#costForm > .btn {
+    margin-top: 4px;
+}
+
+/* Gaya fokus untuk pengguna keyboard. */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid #e6b94f;
+    outline-offset: 3px;
+}
+
+/* =========================================================
+   5. BERANDA / HERO
+   ========================================================= */
+
+/*
+   Hero adalah bagian pertama yang dilihat pengunjung.
+   Latar berupa gradasi hijau lembut.
+*/
+.hero {
+    padding: 72px 0;
+
+    background:
+        radial-gradient(
+            circle at 90% 20%,
+            #dcefd8 0,
+            transparent 34%
+        ),
+        linear-gradient(
+            135deg,
+            #f5f8e9,
+            #edf5e9
+        );
+}
+
+/* Membagi hero menjadi kolom teks dan kolom ilustrasi. */
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: center;
+    gap: 48px;
+}
+
+/* Judul besar pada beranda. */
+.hero h1 {
+    max-width: 700px;
+    margin: 12px 0 18px;
+
+    color: var(--green-dark);
+    font-size: clamp(2.3rem, 5vw, 3.7rem);
+    line-height: 1.15;
+}
+
+/* Deskripsi singkat pada beranda. */
+.hero p {
+    max-width: 600px;
+    color: var(--text-muted);
+    font-size: 1.08rem;
+}
+
+/* Mengatur tombol di bawah deskripsi hero. */
+.hero-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 26px;
+}
+
+/* Kartu ilustrasi tanaman di sebelah kanan hero. */
+.hero-illustration {
+    display: flex;
+    min-height: 300px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 32px;
+
+    text-align: center;
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    box-shadow: var(--shadow);
+}
+
+/* Ukuran simbol tanaman. */
+.hero-plant {
+    font-size: 7rem;
+    line-height: 1.3;
+}
+
+/* Judul pada kartu ilustrasi. */
+.hero-illustration h2 {
+    margin: 8px 0;
+    color: var(--green-dark);
+}
+
+/* Deskripsi kartu ilustrasi. */
+.hero-illustration p {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* =========================================================
+   6. KARTU FITUR UTAMA
+   ========================================================= */
+
+/* Memberikan jarak di bagian fitur. */
+.features {
+    padding: 42px 0;
+}
+
+/* Menampilkan tiga kartu dalam satu baris pada layar besar. */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+/* Gaya dasar untuk kartu fitur dan kartu informasi. */
+.feature-card,
+.card {
+    min-width: 0;
+    padding: 24px;
+
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+/* Kotak hijau muda untuk ikon kartu fitur. */
+.feature-icon {
+    display: grid;
+    width: 52px;
+    height: 52px;
+    place-items: center;
+
+    border-radius: 14px;
+    background-color: var(--green-light);
+    font-size: 1.7rem;
+}
+
+/* Judul dan deskripsi kartu fitur. */
+.feature-card h3 {
+    margin: 15px 0 7px;
+    color: var(--green-dark);
+    font-size: 1.15rem;
+}
+
+.feature-card p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* =========================================================
+   7. BAGIAN-BAGIAN UTAMA
+   ========================================================= */
+
+/* Jarak vertikal untuk setiap bagian besar website. */
+.main-section {
+    padding: 66px 0;
+}
+
+/* Bagian dengan latar putih untuk membedakan area. */
+.section-white {
+    background-color: var(--white);
+}
+
+/* Tata letak dua kolom, misalnya formulir dan informasi. */
+.two-column {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    align-items: start;
+    gap: 28px;
+}
+
+/* =========================================================
+   8. FORMULIR DAN KOLOM INPUT
+   ========================================================= */
+
+/* Kartu yang membungkus formulir. */
+.form-card {
+    min-width: 0;
+    padding: 26px;
+
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+/* Jarak antarinput formulir. */
+.form-group {
+    min-width: 0;
+    margin-bottom: 20px;
+}
+
+/* Label di atas kolom input. */
+.form-group > label,
+.form-group > legend {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: 700;
+}
+
+/* Keterangan tambahan di bawah kolom input. */
+.form-hint {
+    display: block;
+    margin-top: 5px;
+
+    color: var(--text-muted);
+    font-size: 0.88rem;
+}
+
+/* Pengaturan dasar kolom teks, pilihan, dan area teks. */
+input,
+select,
+textarea {
+    width: 100%;
+    min-height: 46px;
+    padding: 11px 12px;
+
+    color: var(--text);
+    background-color: var(--white);
+
+    border: 1px solid #bdcdbf;
+    border-radius: 9px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+/* Efek saat kolom input sedang dipilih. */
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(54, 124, 75, 0.12);
+    outline: none;
+}
+
+/* Mengubah area teks menjadi lebih tinggi. */
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Menggunakan warna hijau untuk kotak centang. */
+input[type="checkbox"] {
+    width: 20px;
+    min-width: 20px;
+    height: 20px;
+    min-height: 20px;
+    margin: 0;
+
+    accent-color: var(--green);
+    cursor: pointer;
+}
+
+/* =========================================================
+   9. PILIHAN GEJALA DAN CHECKBOX
+   ========================================================= */
+
+/*
+   Gaya fieldset dibuat lewat CSS supaya tidak perlu
+   menuliskan style langsung di dalam HTML.
+*/
+.symptom-fieldset {
+    min-width: 0;
+    padding: 0;
+    margin-inline: 0;
+    border: 0;
+}
+
+/* Judul kelompok pilihan gejala. */
+.symptom-fieldset legend {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 0;
+
+    font-weight: 700;
+}
+
+/* Keterangan di bawah judul gejala. */
+.symptom-hint {
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+/* Menyusun pilihan gejala dalam dua kolom. */
+.checkbox-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+/* Setiap gejala ditampilkan seperti kartu pilihan. */
+.checkbox-item {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 9px;
+
+    padding: 10px;
+
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background-color: var(--white);
+
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+/* Teks di dalam kartu gejala. */
+.checkbox-item span {
+    flex: 1;
+    font-size: 0.94rem;
+    line-height: 1.5;
+}
+
+/* Tampilan kartu ketika kotak gejalanya dipilih. */
+.checkbox-item:has(input:checked) {
+    background-color: var(--green-light);
+    border-color: var(--green);
+}
+
+/* Efek ketika penunjuk berada di atas kartu gejala. */
+.checkbox-item:hover {
+    border-color: var(--green);
+}
+
+/* =========================================================
+   10. HASIL PEMERIKSAAN TANAMAN
+   ========================================================= */
+
+/* Kotak hasil pemeriksaan yang dibuat JavaScript. */
+.result-box {
+    margin-top: 22px;
+    padding: 24px;
+
+    background-color: #fbfdf9;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+/* Jangan tampilkan hasil sebelum pemeriksaan dilakukan. */
+.result-box[hidden] {
+    display: none;
+}
+
+/* Judul pada hasil pemeriksaan. */
+.result-box h3 {
+    margin-top: 0;
+    color: var(--green-dark);
+}
+
+/* Mengatur jarak judul lanjutan pada hasil pemeriksaan. */
+.result-box h4 {
+    margin-bottom: 8px;
+    color: var(--green-dark);
+}
+
+/* Jarak antarpoin pemeriksaan. */
+.result-box li {
+    margin-bottom: 8px;
+}
+
+/* =========================================================
+   11. KOTAK PERINGATAN
+   ========================================================= */
+
+/*
+   Peringatan digunakan untuk menyampaikan informasi penting,
+   termasuk batasan hasil pemeriksaan tanaman.
+*/
+.notice {
+    margin-top: 16px;
+    padding: 13px;
+
+    color: var(--warning-text);
+    background-color: var(--warning-bg);
+
+    border-radius: 9px;
+    font-size: 0.92rem;
+}
+
+/* =========================================================
+   12. PUSTAKA TANAMAN
+   ========================================================= */
+
+/* Membatasi lebar kolom pencarian pustaka. */
+.search-box {
+    max-width: 520px;
+    margin-bottom: 24px;
+}
+
+.search-box label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: 700;
+}
+
+/* Menyusun kartu pustaka dalam tiga kolom. */
+.library-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 18px;
+}
+
+/* Kartu pustaka memakai tata letak gambar dan isi terpisah. */
+.library-card {
+    min-width: 0;
+    overflow: hidden;
+    padding: 0;
+}
+
+/* Menyembunyikan kartu yang tidak cocok dengan kata pencarian. */
+.library-card[hidden] {
+    display: none;
+}
+
+/* Area ilustrasi pada masing-masing kartu pustaka. */
+.library-image {
+    display: grid;
+    min-height: 140px;
+    place-items: center;
+
+    background-color: var(--green-light);
+    font-size: 4rem;
+}
+
+/* Bagian teks kartu pustaka. */
+.library-content {
+    padding: 20px;
+}
+
+.library-content h3 {
+    margin: 10px 0 6px;
+    color: var(--green-dark);
+    font-size: 1.12rem;
+    line-height: 1.4;
+}
+
+.library-content p {
+    color: var(--text-muted);
+    font-size: 0.94rem;
+}
+
+/* Label kecil untuk menunjukkan jenis tanaman. */
+.tag {
+    display: inline-block;
+    padding: 4px 9px;
+
+    color: var(--green-dark);
+    background-color: var(--green-light);
+
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+/* Pesan ketika pencarian tidak menemukan hasil. */
+.empty-state {
+    padding: 24px;
+
+    color: var(--text-muted);
+    text-align: center;
+
+    background-color: var(--white);
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+}
+
+/* =========================================================
+   13. BUKU HARIAN KEBUN
+   ========================================================= */
+
+/* Menyusun daftar catatan secara vertikal. */
+.diary-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 22px;
+}
+
+/* Kartu untuk satu catatan kebun. */
+.diary-entry {
+    min-width: 0;
+    padding: 16px;
+
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+/* Judul catatan. */
+.diary-entry h4 {
+    margin: 0 0 5px;
+    color: var(--green-dark);
+}
+
+/* Jarak antarbaris informasi catatan. */
+.diary-entry p {
+    margin: 5px 0;
+    overflow-wrap: anywhere;
+}
+
+/* Informasi pendamping, misalnya tanggal pengamatan. */
+.diary-meta {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+}
+
+/* Memberikan jarak pada tombol ekspor CSV. */
+#exportDiary {
+    margin-top: 16px;
+}
+
+/* =========================================================
+   14. KALKULATOR BIAYA PERAWATAN
+   ========================================================= */
+
+/* Kotak hasil total biaya. */
+.calculator-result {
+    margin-top: 18px;
+    padding: 20px;
+
+    background-color: var(--green-light);
+    border-radius: 12px;
+}
+
+/* Angka total biaya dibuat lebih menonjol. */
+.calculator-result strong {
+    display: block;
+    margin-top: 4px;
+
+    color: var(--green-dark);
+    font-size: 1.8rem;
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+}
+
+/* Teks penjelas di dalam hasil kalkulator. */
+.calculator-result p {
+    margin-bottom: 0;
+    font-size: 0.92rem;
+}
+
+/* =========================================================
+   15. BAGIAN BANTUAN
+   ========================================================= */
+
+/* Kartu bantuan dengan warna hijau gelap. */
+.help-box {
+    padding: 32px;
+
+    color: var(--white);
+    background-color: var(--green-dark);
+
+    border-radius: 20px;
+}
+
+/* Label kecil di dalam kotak bantuan. */
+.help-box .eyebrow {
+    color: #d4ebd4;
+}
+
+/* Teks dalam kotak bantuan dibuat sedikit lebih lembut. */
+.help-box p {
+    color: #e2eee4;
+}
+
+/* Tombol putih agar kontras dengan latar hijau gelap. */
+.help-box .btn {
+    margin-top: 8px;
+
+    color: var(--green-dark);
+    background-color: var(--white);
+}
+
+/* Efek hover untuk tombol bantuan. */
+.help-box .btn:hover {
+    color: var(--white);
+    background-color: var(--green);
+    border-color: var(--white);
+}
+
+/* =========================================================
+   16. FOOTER
+   ========================================================= */
+
+/* Bagian penutup di bawah halaman. */
+footer {
+    padding: 28px 0;
+
+    color: var(--text-muted);
+    background-color: var(--cream);
+
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* Mengatur jarak antarparagraf footer. */
+footer p {
+    margin: 6px 0;
+}
+
+/* =========================================================
+   17. RESPONSIVE DESIGN: TABLET DAN LAYAR MENENGAH
+   ========================================================= */
+
+/*
+   Media query menjalankan aturan khusus ketika lebar layar
+   850 piksel atau kurang, misalnya pada tablet.
+*/
+@media (max-width: 850px) {
+    /* Menu berpindah ke susunan vertikal jika ruang berkurang. */
+    .nav-inner {
+        min-height: auto;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+        padding-top: 14px;
+        padding-bottom: 14px;
+    }
+
+    /* Menu tetap bisa membungkus ke baris berikutnya. */
+    .nav-links {
+        justify-content: flex-start;
+        gap: 12px 18px;
+    }
+
+    /* Hero dan formulir memakai satu kolom. */
+    .hero-grid,
+    .two-column {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        padding: 48px 0;
+    }
+
+    /* Ilustrasi dibuat lebih pendek di layar menengah. */
+    .hero-illustration {
+        min-height: 230px;
+    }
+
+    /* Kartu memakai dua kolom pada layar menengah. */
+    .feature-grid,
+    .library-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .hero-grid {
+        gap: 32px;
+    }
+}
+
+/* =========================================================
+   18. RESPONSIVE DESIGN: PONSEL
+   ========================================================= */
+
+/*
+   Aturan ini aktif pada layar dengan lebar 560 piksel atau kurang.
+   Tujuannya agar teks, tombol, dan formulir nyaman dipakai di ponsel.
+*/
+@media (max-width: 560px) {
+    /* Kartu disusun satu per baris. */
+    .feature-grid,
+    .library-grid,
+    .checkbox-list {
+        grid-template-columns: 1fr;
+    }
+
+    /* Mengurangi padding supaya isi tidak terasa sempit. */
+    .feature-card,
+    .card,
+    .form-card {
+        padding: 19px;
+    }
+
+    /* Ilustrasi berukuran lebih kecil. */
+    .hero-plant {
+        font-size: 5rem;
+    }
+
+    /* Tombol hero memenuhi lebar layar. */
+    .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+    }
+
+    /* Menu dibuat sedikit lebih rapat. */
+    .nav-links {
+        gap: 10px 14px;
+    }
+
+    .nav-links a {
+        font-size: 0.85rem;
+    }
+
+    /* Mengurangi jarak vertikal setiap bagian. */
+    .main-section {
+        padding: 48px 0;
+    }
+
+    .features {
+        padding: 28px 0;
+    }
+
+    .help-box {
+        padding: 24px;
+    }
+
+    /* Angka besar tidak menyebabkan kartu melebar. */
+    .calculator-result strong {
+        font-size: 1.6rem;
+    }
+}
+
+/* =========================================================
+   19. AKSESIBILITAS DAN PENGATURAN GERAKAN
+   ========================================================= */
+
+/*
+   Sebagian pengguna memilih pengurangan animasi pada perangkatnya.
+   Aturan ini menghormati preferensi tersebut.
+*/
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
