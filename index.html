@@ -1,0 +1,1907 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Membuat tampilan menyesuaikan ukuran layar perangkat -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Informasi halaman untuk browser dan mesin pencari -->
+    <meta
+        name="description"
+        content="TANI SIAGA membantu petani belajar mengenali gejala tanaman,
+        mencatat kondisi kebun, dan menghitung biaya perawatan."
+    >
+
+    <title>TANI SIAGA | Teman Belajar Petani</title>
+
+    <style>
+        /* ==================================================
+           1. VARIABEL DAN PENGATURAN DASAR
+           ================================================== */
+
+        /* Variabel warna supaya mudah diubah */
+        :root {
+            --green-dark: #245c3a;
+            --green: #367c4b;
+            --green-light: #e9f4e9;
+            --cream: #f8f8f0;
+            --white: #ffffff;
+            --text: #26352a;
+            --text-muted: #68766b;
+            --border: #dce6dc;
+            --warning-bg: #fff4d9;
+            --warning-text: #805c10;
+            --radius: 16px;
+            --shadow: 0 5px 20px rgba(31, 73, 43, 0.07);
+        }
+
+        /* Mengatur perhitungan ukuran elemen */
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Mengatur perpindahan halaman saat tautan diklik */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+
+        /* Gaya dasar seluruh halaman */
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* Membuat gambar tidak melampaui wadahnya */
+        img {
+            max-width: 100%;
+        }
+
+        /* Menghilangkan garis bawah tautan */
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Membatasi lebar konten agar mudah dibaca */
+        .container {
+            width: min(1120px, 92%);
+            margin-inline: auto;
+        }
+
+        /* Gaya judul bagian */
+        .section-heading {
+            margin-bottom: 28px;
+        }
+
+        .section-heading h2 {
+            margin: 0 0 8px;
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            line-height: 1.3;
+        }
+
+        .section-heading p {
+            margin: 0;
+            color: var(--text-muted);
+            max-width: 680px;
+        }
+
+        .eyebrow {
+            color: var(--green);
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        /* ==================================================
+           2. NAVIGASI WEBSITE
+           ================================================== */
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.97);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            min-height: 76px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--green-dark);
+        }
+
+        .brand-icon {
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: var(--green);
+        }
+
+        /* ==================================================
+           3. TOMBOL
+           ================================================== */
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 46px;
+            padding: 11px 19px;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            background: var(--green);
+            color: var(--white);
+            font: inherit;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .btn:hover {
+            background: var(--green-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            color: var(--green-dark);
+            background: var(--white);
+            border-color: var(--border);
+        }
+
+        .btn-secondary:hover {
+            color: var(--white);
+        }
+
+        .btn-small {
+            min-height: 38px;
+            padding: 8px 13px;
+            font-size: 0.9rem;
+        }
+
+        button:focus-visible,
+        a:focus-visible,
+        input:focus-visible,
+        select:focus-visible,
+        textarea:focus-visible {
+            outline: 3px solid #e6b94f;
+            outline-offset: 3px;
+        }
+
+        /* ==================================================
+           4. BERANDA / HERO
+           ================================================== */
+
+        .hero {
+            padding: 72px 0;
+            background:
+                radial-gradient(
+                    circle at 90% 20%,
+                    #dcefd8 0,
+                    transparent 34%
+                ),
+                linear-gradient(135deg, #f5f8e9, #edf5e9);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: center;
+            gap: 48px;
+        }
+
+        .hero h1 {
+            max-width: 700px;
+            margin: 12px 0 18px;
+            color: var(--green-dark);
+            font-size: clamp(2.3rem, 5vw, 3.7rem);
+            line-height: 1.15;
+        }
+
+        .hero p {
+            max-width: 600px;
+            color: var(--text-muted);
+            font-size: 1.08rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 26px;
+        }
+
+        .hero-illustration {
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 32px;
+            text-align: center;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            box-shadow: var(--shadow);
+        }
+
+        .hero-plant {
+            font-size: 7rem;
+            line-height: 1.3;
+        }
+
+        .hero-illustration h2 {
+            margin: 8px 0;
+            color: var(--green-dark);
+        }
+
+        .hero-illustration p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* ==================================================
+           5. KARTU FITUR
+           ================================================== */
+
+        .features {
+            padding: 42px 0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .feature-card,
+        .card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .feature-icon {
+            width: 52px;
+            height: 52px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            background: var(--green-light);
+            font-size: 1.7rem;
+        }
+
+        .feature-card h3 {
+            margin: 15px 0 7px;
+        }
+
+        .feature-card p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* ==================================================
+           6. BAGIAN UTAMA
+           ================================================== */
+
+        .main-section {
+            padding: 66px 0;
+        }
+
+        .section-white {
+            background: var(--white);
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 28px;
+            align-items: start;
+        }
+
+        /* ==================================================
+           7. FORMULIR
+           ================================================== */
+
+        .form-card {
+            background: var(--white);
+            padding: 26px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: 700;
+        }
+
+        .form-hint {
+            display: block;
+            margin-top: 5px;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            min-height: 46px;
+            padding: 11px 12px;
+            border: 1px solid #bdcdbf;
+            border-radius: 9px;
+            background: var(--white);
+            color: var(--text);
+            font: inherit;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            min-height: 20px;
+            accent-color: var(--green);
+        }
+
+        .checkbox-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            cursor: pointer;
+            font-size: 0.94rem;
+        }
+
+        .checkbox-item span {
+            flex: 1;
+        }
+
+        .checkbox-item:has(input:checked) {
+            background: var(--green-light);
+            border-color: var(--green);
+        }
+
+        /* ==================================================
+           8. KOTAK HASIL PEMERIKSAAN
+           ================================================== */
+
+        .result-box {
+            margin-top: 22px;
+            padding: 24px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: #fbfdf9;
+        }
+
+        .result-box[hidden] {
+            display: none;
+        }
+
+        .result-box h3 {
+            margin-top: 0;
+            color: var(--green-dark);
+        }
+
+        .notice {
+            margin-top: 16px;
+            padding: 13px;
+            border-radius: 9px;
+            background: var(--warning-bg);
+            color: var(--warning-text);
+            font-size: 0.92rem;
+        }
+
+        .result-box li {
+            margin-bottom: 8px;
+        }
+
+        /* ==================================================
+           9. PUSTAKA INFORMASI
+           ================================================== */
+
+        .search-box {
+            max-width: 520px;
+            margin-bottom: 24px;
+        }
+
+        .library-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .library-card {
+            overflow: hidden;
+            padding: 0;
+        }
+
+        .library-card[hidden] {
+            display: none;
+        }
+
+        .library-image {
+            display: grid;
+            min-height: 140px;
+            place-items: center;
+            background: var(--green-light);
+            font-size: 4rem;
+        }
+
+        .library-content {
+            padding: 20px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 4px 9px;
+            border-radius: 20px;
+            background: var(--green-light);
+            color: var(--green-dark);
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .library-content h3 {
+            margin: 10px 0 6px;
+        }
+
+        .library-content p {
+            color: var(--text-muted);
+            font-size: 0.94rem;
+        }
+
+        /* ==================================================
+           10. BUKU HARIAN KEBUN
+           ================================================== */
+
+        .diary-list {
+            display: grid;
+            gap: 12px;
+            margin-top: 22px;
+        }
+
+        .diary-entry {
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--white);
+        }
+
+        .diary-entry h4 {
+            margin: 0 0 5px;
+        }
+
+        .diary-entry p {
+            margin: 5px 0;
+            overflow-wrap: anywhere;
+        }
+
+        .diary-meta {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+        }
+
+        .empty-state {
+            padding: 24px;
+            text-align: center;
+            color: var(--text-muted);
+            border: 1px dashed var(--border);
+            border-radius: 12px;
+        }
+
+        /* ==================================================
+           11. KALKULATOR BIAYA
+           ================================================== */
+
+        .calculator-result {
+            margin-top: 18px;
+            padding: 20px;
+            border-radius: 12px;
+            background: var(--green-light);
+        }
+
+        .calculator-result strong {
+            display: block;
+            margin-top: 4px;
+            color: var(--green-dark);
+            font-size: 1.8rem;
+        }
+
+        /* ==================================================
+           12. BAGIAN BANTUAN DAN FOOTER
+           ================================================== */
+
+        .help-box {
+            padding: 32px;
+            background: var(--green-dark);
+            color: var(--white);
+            border-radius: 20px;
+        }
+
+        .help-box p {
+            color: #e2eee4;
+        }
+
+        .help-box .btn {
+            color: var(--green-dark);
+            background: var(--white);
+        }
+
+        footer {
+            padding: 28px 0;
+            color: var(--text-muted);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* ==================================================
+           13. RESPONSIVE DESIGN
+           Tampilan menyesuaikan tablet dan ponsel
+           ================================================== */
+
+        @media (max-width: 850px) {
+            .nav-inner {
+                padding: 14px 0;
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .nav-links {
+                gap: 12px 18px;
+            }
+
+            .hero-grid,
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 48px 0;
+            }
+
+            .hero-illustration {
+                min-height: 230px;
+            }
+
+            .feature-grid,
+            .library-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 560px) {
+            .feature-grid,
+            .library-grid,
+            .checkbox-list {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card,
+            .form-card {
+                padding: 19px;
+            }
+
+            .hero-plant {
+                font-size: 5rem;
+            }
+
+            .hero-actions .btn {
+                width: 100%;
+            }
+
+            .nav-links {
+                gap: 10px 14px;
+            }
+
+            .nav-links a {
+                font-size: 0.85rem;
+            }
+
+            .main-section {
+                padding: 48px 0;
+            }
+
+            .help-box {
+                padding: 24px;
+            }
+        }
+
+        /* Mengurangi animasi bagi pengguna yang memilih
+           pengaturan minim gerakan pada perangkatnya */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ==================================================
+         HEADER DAN MENU NAVIGASI
+         Setiap tautan menuju bagian tertentu pada halaman
+         ================================================== -->
+
+    <header class="navbar">
+        <div class="container nav-inner">
+
+            <a class="brand" href="#beranda" aria-label="TANI SIAGA, beranda">
+                <span class="brand-icon" aria-hidden="true">🌱</span>
+                <span>TANI SIAGA</span>
+            </a>
+
+            <nav class="nav-links" aria-label="Navigasi utama">
+                <a href="#beranda">Beranda</a>
+                <a href="#diagnosis">Cek Tanaman</a>
+                <a href="#pustaka">Pustaka</a>
+                <a href="#kebun">Buku Kebun</a>
+                <a href="#biaya">Kalkulator Biaya</a>
+            </nav>
+
+        </div>
+    </header>
+
+    <main>
+
+        <!-- ==================================================
+             BAGIAN 1: BERANDA
+             Memperkenalkan tujuan dan fitur website
+             ================================================== -->
+
+        <section class="hero" id="beranda">
+            <div class="container hero-grid">
+
+                <div>
+                    <span class="eyebrow">Teman belajar petani</span>
+
+                    <h1>
+                        Tanaman Sehat,
+                        Petani Lebih Siap.
+                    </h1>
+
+                    <p>
+                        Kenali gejala tanaman, pelajari cara pemeriksaan
+                        awal, dan catat perkembangan kebun dalam satu
+                        website yang sederhana dan mudah digunakan.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a class="btn" href="#diagnosis">
+                            🔎 Cek Kondisi Tanaman
+                        </a>
+
+                        <a class="btn btn-secondary" href="#pustaka">
+                            📚 Pelajari Tanaman
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Ilustrasi awal menggunakan emoji agar tidak
+                     memerlukan gambar eksternal -->
+                <div class="hero-illustration">
+                    <div class="hero-plant" aria-hidden="true">🌿</div>
+                    <h2>Mulai dari Pengamatan</h2>
+                    <p>
+                        Setiap masalah tanaman perlu diperiksa
+                        sebelum menentukan tindakan.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================================================
+             BAGIAN 2: FITUR UTAMA
+             ================================================== -->
+
+        <section class="features" aria-label="Fitur utama">
+            <div class="container feature-grid">
+
+                <article class="feature-card">
+                    <div class="feature-icon" aria-hidden="true">🔎</div>
+                    <h3>Cek Kondisi Tanaman</h3>
+                    <p>
+                        Pilih gejala dan pelajari kemungkinan penyebab
+                        serta langkah pemeriksaan awal.
+                    </p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon" aria-hidden="true">📖</div>
+                    <h3>Pustaka Pertanian</h3>
+                    <p>
+                        Pelajari informasi dasar tanaman dan
+                        gangguan yang perlu diwaspadai.
+                    </p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon" aria-hidden="true">📝</div>
+                    <h3>Buku Harian Kebun</h3>
+                    <p>
+                        Catat gejala, tindakan perawatan,
+                        dan perkembangan tanaman.
+                    </p>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- ==================================================
+             BAGIAN 3: PEMERIKSAAN GEJALA TANAMAN
+             ================================================== -->
+
+        <section class="main-section section-white" id="diagnosis">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="eyebrow">Pemeriksaan awal</span>
+                    <h2>Apa yang terjadi pada tanamanmu?</h2>
+                    <p>
+                        Isi informasi di bawah ini untuk mendapatkan
+                        panduan pemeriksaan awal. Pilih gejala yang
+                        benar-benar kamu amati.
+                    </p>
+                </div>
+
+                <div class="two-column">
+
+                    <!-- Formulir masukan pengguna -->
+                    <form class="form-card" id="diagnosisForm">
+
+                        <div class="form-group">
+                            <label for="crop">1. Jenis tanaman</label>
+
+                            <select id="crop" name="crop" required>
+                                <option value="">Pilih tanaman</option>
+                                <option value="cabai">Cabai</option>
+                                <option value="tomat">Tomat</option>
+                                <option value="padi">Padi</option>
+                                <option value="jagung">Jagung</option>
+                                <option value="sayuran">Sayuran lainnya</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="plantPart">
+                                2. Bagian tanaman yang bermasalah
+                            </label>
+
+                            <select id="plantPart" name="plantPart" required>
+                                <option value="">Pilih bagian tanaman</option>
+                                <option value="daun">Daun</option>
+                                <option value="batang">Batang</option>
+                                <option value="akar">Akar</option>
+                                <option value="buah">Buah</option>
+                                <option value="seluruh">Seluruh tanaman</option>
+                            </select>
+                        </div>
+
+                        <fieldset class="form-group" style="border: 0; padding: 0; margin-inline: 0;">
+                            <legend style="font-weight: 700; margin-bottom: 10px;">
+                                3. Gejala yang terlihat
+                            </legend>
+
+                            <span class="form-hint" style="margin-bottom: 12px;">
+                                Kamu bisa memilih lebih dari satu gejala.
+                            </span>
+
+                            <div class="checkbox-list">
+
+                                <label class="checkbox-item">
+                                    <input
+                                        type="checkbox"
+                                        name="symptom"
+                                        value="kuning"
+                                    >
+                                    <span>Daun menguning</span>
+                                </label>
+
+                                <label class="checkbox-item">
+                                    <input
+                                        type="checkbox"
+                                        name="symptom"
+                                        value="bercak"
+                                    >
+                                    <span>Bercak pada daun</span>
+                                </label>
+
+                                <label class="checkbox-item">
+                                    <input
+                                        type="checkbox"
+                                        name="symptom"
+                                        value="layu"
+                                    >
+                                    <span>Tanaman layu</span>
+                                </label>
+
+                                <label class="checkbox-item">
+                                    <input
+                                        type="checkbox"
+                                        name="symptom"
+                                        value="gulung"
+                                    >
+                                    <span>Daun menggulung</span>
+                                </label>
+
+                                <label class="checkbox-item">
+                                    <input
+                                        type="checkbox"
+                                        name="symptom"
+                                        value="lubang"
+                                    >
+                                    <span>Daun berlubang</span>
+                                </label>
+
+                                <label class="checkbox-item">
+                                    <input
+                                        type="checkbox"
+                                        name="symptom"
+                                        value="busuk"
+                                    >
+                                    <span>Bagian tanaman membusuk</span>
+                                </label>
+
+                            </div>
+                        </fieldset>
+
+                        <div class="form-group">
+                            <label for="spread">
+                                4. Seberapa luas gejalanya?
+                            </label>
+
+                            <select id="spread" name="spread" required>
+                                <option value="">Pilih kondisi</option>
+                                <option value="satu">
+                                    Hanya satu tanaman
+                                </option>
+                                <option value="beberapa">
+                                    Beberapa tanaman
+                                </option>
+                                <option value="banyak">
+                                    Sudah menyebar luas
+                                </option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn">
+                            Periksa Gejala
+                        </button>
+
+                        <button
+                            type="reset"
+                            class="btn btn-secondary"
+                            id="resetDiagnosis"
+                            style="margin-top: 8px;"
+                        >
+                            Atur Ulang
+                        </button>
+
+                    </form>
+
+                    <!-- Hasil baru ditampilkan setelah formulir dikirim -->
+                    <div>
+                        <div class="card">
+                            <h3>Bagaimana pemeriksaan bekerja?</h3>
+
+                            <p>
+                                Website mencocokkan pilihanmu dengan
+                                aturan contoh yang tersedia. Hasilnya
+                                merupakan petunjuk untuk pemeriksaan
+                                lebih lanjut, bukan kepastian penyakit.
+                            </p>
+
+                            <ul>
+                                <li>Periksa gejala dengan teliti.</li>
+                                <li>Amati bagian tanaman lain.</li>
+                                <li>Catat perubahan dari waktu ke waktu.</li>
+                                <li>Cari bantuan ahli jika masalah meluas.</li>
+                            </ul>
+                        </div>
+
+                        <div
+                            class="result-box"
+                            id="diagnosisResult"
+                            role="status"
+                            aria-live="polite"
+                            hidden
+                        >
+                            <!-- JavaScript mengisi hasil pemeriksaan di sini -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================
+             BAGIAN 4: PUSTAKA TANAMAN
+             ================================================== -->
+
+        <section class="main-section" id="pustaka">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="eyebrow">Belajar bertani</span>
+                    <h2>Pustaka Tanaman</h2>
+                    <p>
+                        Kenali gejala dan langkah pemeriksaan awal.
+                        Konten berikut merupakan contoh edukasi dan
+                        perlu dilengkapi referensi terverifikasi.
+                    </p>
+                </div>
+
+                <!-- Kolom pencarian pustaka -->
+                <div class="search-box">
+                    <label for="searchPlant">
+                        Cari informasi berdasarkan kata kunci
+                    </label>
+
+                    <input
+                        type="search"
+                        id="searchPlant"
+                        placeholder="Contoh: cabai, daun kuning..."
+                    >
+                </div>
+
+                <div class="library-grid" id="libraryGrid">
+
+                    <article
+                        class="card library-card"
+                        data-search="cabai daun kuning menggulung hama"
+                    >
+                        <div class="library-image" aria-hidden="true">🌶️</div>
+
+                        <div class="library-content">
+                            <span class="tag">Cabai</span>
+                            <h3>Daun Menguning atau Menggulung</h3>
+                            <p>
+                                Perubahan daun bisa berkaitan dengan
+                                hama, gangguan nutrisi, penyakit,
+                                atau kondisi air.
+                            </p>
+
+                            <p>
+                                <strong>Langkah awal:</strong>
+                                periksa bagian bawah daun, kondisi
+                                tanah, dan perubahan pada pucuk.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article
+                        class="card library-card"
+                        data-search="tomat bercak daun cokelat"
+                    >
+                        <div class="library-image" aria-hidden="true">🍅</div>
+
+                        <div class="library-content">
+                            <span class="tag">Tomat</span>
+                            <h3>Bercak pada Daun</h3>
+                            <p>
+                                Bercak dapat memiliki banyak penyebab,
+                                termasuk penyakit dan kerusakan lingkungan.
+                            </p>
+
+                            <p>
+                                <strong>Langkah awal:</strong>
+                                amati bentuk bercak, penyebarannya,
+                                serta kondisi daun yang lain.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article
+                        class="card library-card"
+                        data-search="padi layu akar air"
+                    >
+                        <div class="library-image" aria-hidden="true">🌾</div>
+
+                        <div class="library-content">
+                            <span class="tag">Padi</span>
+                            <h3>Tanaman Terlihat Layu</h3>
+                            <p>
+                                Layu tidak selalu disebabkan oleh
+                                penyakit. Kondisi air, akar, dan
+                                gangguan organisme perlu diperiksa.
+                            </p>
+
+                            <p>
+                                <strong>Langkah awal:</strong>
+                                periksa kondisi air, pangkal batang,
+                                dan tanaman di sekitarnya.
+                            </p>
+                        </div>
+                    </article>
+
+                </div>
+
+                <p id="searchEmpty" class="empty-state" hidden>
+                    Informasi tidak ditemukan. Coba kata kunci lain.
+                </p>
+
+                <div class="notice">
+                    Informasi pustaka di atas adalah contoh untuk
+                    pengembangan tampilan website. Sebelum dipublikasikan
+                    sebagai panduan pertanian, lengkapi setiap artikel
+                    dengan sumber yang dapat diverifikasi.
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================================================
+             BAGIAN 5: BUKU HARIAN KEBUN
+             Data disimpan di browser menggunakan localStorage
+             ================================================== -->
+
+        <section class="main-section section-white" id="kebun">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="eyebrow">Catatan perkembangan</span>
+                    <h2>Buku Harian Kebun</h2>
+                    <p>
+                        Catat kondisi tanaman dan tindakan yang dilakukan
+                        agar perkembangannya lebih mudah dipantau.
+                    </p>
+                </div>
+
+                <div class="two-column">
+
+                    <form class="form-card" id="diaryForm">
+
+                        <div class="form-group">
+                            <label for="diaryDate">Tanggal pengamatan</label>
+                            <input
+                                type="date"
+                                id="diaryDate"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="diaryCrop">Jenis tanaman</label>
+                            <select id="diaryCrop" required>
+                                <option value="">Pilih tanaman</option>
+                                <option value="Cabai">Cabai</option>
+                                <option value="Tomat">Tomat</option>
+                                <option value="Padi">Padi</option>
+                                <option value="Jagung">Jagung</option>
+                                <option value="Tanaman lain">Tanaman lain</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="diaryCondition">
+                                Kondisi tanaman
+                            </label>
+                            <textarea
+                                id="diaryCondition"
+                                placeholder="Contoh: beberapa daun mulai menguning..."
+                                required
+                            ></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="diaryAction">
+                                Tindakan yang dilakukan
+                            </label>
+                            <textarea
+                                id="diaryAction"
+                                placeholder="Contoh: memeriksa daun dan mencatat penyebaran gejala..."
+                                required
+                            ></textarea>
+                        </div>
+
+                        <button type="submit" class="btn">
+                            Simpan Catatan
+                        </button>
+
+                    </form>
+
+                    <div>
+                        <h3>Riwayat Pengamatan</h3>
+
+                        <p class="form-hint">
+                            Catatan hanya disimpan di browser perangkat ini.
+                        </p>
+
+                        <div
+                            id="diaryList"
+                            class="diary-list"
+                            aria-live="polite"
+                        >
+                            <!-- JavaScript menampilkan catatan di sini -->
+                        </div>
+
+                        <button
+                            type="button"
+                            class="btn btn-secondary btn-small"
+                            id="exportDiary"
+                            style="margin-top: 16px;"
+                        >
+                            Ekspor Catatan CSV
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================
+             BAGIAN 6: KALKULATOR BIAYA
+             Menghitung biaya berdasarkan masukan pengguna
+             ================================================== -->
+
+        <section class="main-section" id="biaya">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="eyebrow">Perencanaan sederhana</span>
+                    <h2>Kalkulator Biaya Perawatan</h2>
+                    <p>
+                        Hitung jumlah pengeluaran perawatan yang kamu
+                        masukkan. Hasil ini bukan rekomendasi dosis
+                        maupun perkiraan harga pasar.
+                    </p>
+                </div>
+
+                <div class="two-column">
+
+                    <form class="form-card" id="costForm">
+
+                        <div class="form-group">
+                            <label for="seedCost">
+                                Biaya benih atau bibit (Rp)
+                            </label>
+                            <input
+                                type="number"
+                                id="seedCost"
+                                min="0"
+                                step="1000"
+                                value="0"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fertilizerCost">
+                                Biaya pupuk (Rp)
+                            </label>
+                            <input
+                                type="number"
+                                id="fertilizerCost"
+                                min="0"
+                                step="1000"
+                                value="0"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="careCost">
+                                Biaya perawatan lainnya (Rp)
+                            </label>
+                            <input
+                                type="number"
+                                id="careCost"
+                                min="0"
+                                step="1000"
+                                value="0"
+                                required
+                            >
+                        </div>
+
+                        <button type="submit" class="btn">
+                            Hitung Total Biaya
+                        </button>
+
+                        <div
+                            class="calculator-result"
+                            id="costResult"
+                            aria-live="polite"
+                        >
+                            Total biaya
+                            <strong>Rp0</strong>
+                        </div>
+
+                    </form>
+
+                    <div class="card">
+                        <h3>Mengapa pencatatan biaya penting?</h3>
+
+                        <p>
+                            Pencatatan dapat membantu petani memahami
+                            ke mana modal digunakan dan membandingkan
+                            pengeluaran antarperiode.
+                        </p>
+
+                        <ul>
+                            <li>Catat pengeluaran berdasarkan tanggal.</li>
+                            <li>Bedakan biaya rutin dan biaya tak terduga.</li>
+                            <li>Gunakan harga aktual dari pembelian.</li>
+                            <li>Bandingkan biaya dengan hasil panen.</li>
+                        </ul>
+
+                        <p class="form-hint">
+                            Versi ini menghitung total tiga kategori biaya.
+                            Belum menghitung laba, produktivitas, atau
+                            kerugian akibat penyakit.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================
+             BAGIAN 7: BANTUAN
+             Tambahkan kontak lokal setelah diverifikasi
+             ================================================== -->
+
+        <section class="main-section section-white" id="bantuan">
+            <div class="container">
+
+                <div class="help-box">
+                    <span class="eyebrow" style="color: #d4ebd4;">
+                        Butuh bantuan lebih lanjut?
+                    </span>
+
+                    <h2>Jangan menebak jika masalah semakin parah.</h2>
+
+                    <p>
+                        Jika gejala menyebar, tanaman semakin rusak,
+                        atau penyebabnya belum jelas, konsultasikan
+                        dengan penyuluh pertanian atau petugas
+                        perlindungan tanaman yang kompeten.
+                    </p>
+
+                    <!-- Ganti URL di bawah dengan kontak resmi
+                         yang telah diverifikasi sebelum publikasi -->
+                    <a
+                        class="btn"
+                        href="https://sinta.ditjenbun.pertanian.go.id/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Kunjungi Portal SInTa
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================================================
+         FOOTER
+         ================================================== -->
+
+    <footer>
+        <div class="container">
+            <p>
+                © <span id="currentYear"></span> TANI SIAGA.
+                Belajar, mengamati, dan bertani lebih siap.
+            </p>
+
+            <p>
+                Informasi website ini merupakan panduan edukasi awal,
+                bukan pengganti diagnosis tenaga ahli.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        /* ==================================================
+           1. PENGATURAN UMUM
+           ================================================== */
+
+        // Menampilkan tahun secara otomatis di footer.
+        document.getElementById("currentYear").textContent =
+            new Date().getFullYear();
+
+        // Menentukan tanggal hari ini pada formulir catatan kebun.
+        const diaryDateInput = document.getElementById("diaryDate");
+
+        const today = new Date();
+        const localDate = new Date(
+            today.getTime() - today.getTimezoneOffset() * 60000
+        ).toISOString().slice(0, 10);
+
+        diaryDateInput.value = localDate;
+
+        /* ==================================================
+           2. PEMERIKSAAN GEJALA TANAMAN
+           ================================================== */
+
+        const diagnosisForm = document.getElementById("diagnosisForm");
+        const diagnosisResult = document.getElementById("diagnosisResult");
+
+        // Aturan contoh ini hanya untuk demonstrasi fungsi JavaScript.
+        // Ini bukan database penyakit yang telah divalidasi.
+        //
+        // Untuk versi nyata, setiap aturan harus dilengkapi:
+        // - referensi ilmiah atau resmi;
+        // - gejala pembeda;
+        // - tingkat kepastian yang tervalidasi;
+        // - saran penanganan yang ditinjau tenaga kompeten.
+
+        const symptomGuides = {
+            kuning: {
+                title: "Daun menguning",
+                checks: [
+                    "Periksa apakah perubahan warna terjadi pada daun tua, daun muda, atau keduanya.",
+                    "Amati kondisi kelembapan tanah dan pola penyiraman.",
+                    "Periksa apakah ada hama, bercak, atau perubahan lain."
+                ]
+            },
+
+            bercak: {
+                title: "Bercak pada daun",
+                checks: [
+                    "Catat bentuk, warna, ukuran, dan lokasi bercak.",
+                    "Periksa apakah bercak bertambah pada pengamatan berikutnya.",
+                    "Bandingkan kondisi beberapa tanaman di sekitarnya."
+                ]
+            },
+
+            layu: {
+                title: "Tanaman layu",
+                checks: [
+                    "Periksa kelembapan tanah dan kondisi drainase.",
+                    "Amati pangkal batang dan kondisi akar jika memungkinkan.",
+                    "Catat apakah tanaman pulih atau tetap layu setelah kondisi air diperiksa."
+                ]
+            },
+
+            gulung: {
+                title: "Daun menggulung",
+                checks: [
+                    "Periksa bagian bawah daun untuk melihat keberadaan hama.",
+                    "Amati apakah pucuk atau pertumbuhan baru ikut berubah.",
+                    "Periksa apakah gejala terjadi pada satu atau banyak tanaman."
+                ]
+            },
+
+            lubang: {
+                title: "Daun berlubang",
+                checks: [
+                    "Periksa daun, terutama bagian bawah, untuk mencari tanda hama.",
+                    "Amati bentuk kerusakan dan kemungkinan bekas gigitan.",
+                    "Catat bagian tanaman yang paling banyak terdampak."
+                ]
+            },
+
+            busuk: {
+                title: "Bagian tanaman membusuk",
+                checks: [
+                    "Amati lokasi pembusukan, misalnya pada akar, batang, atau buah.",
+                    "Periksa kondisi air, drainase, dan jaringan tanaman di sekitar bagian tersebut.",
+                    "Hindari memindahkan tanah atau alat dari tanaman bermasalah ke tanaman sehat sebelum dibersihkan."
+                ]
+            }
+        };
+
+        // Ketika pengguna mengirimkan formulir, jalankan pemeriksaan.
+        diagnosisForm.addEventListener("submit", function (event) {
+            // Mencegah browser memuat ulang halaman.
+            event.preventDefault();
+
+            const crop = document.getElementById("crop").value;
+            const plantPart = document.getElementById("plantPart").value;
+            const spread = document.getElementById("spread").value;
+
+            // Mengambil semua kotak gejala yang dipilih pengguna.
+            const selectedSymptoms = Array.from(
+                diagnosisForm.querySelectorAll(
+                    'input[name="symptom"]:checked'
+                )
+            ).map(function (checkbox) {
+                return checkbox.value;
+            });
+
+            // Pengguna harus memilih sedikitnya satu gejala.
+            if (selectedSymptoms.length === 0) {
+                diagnosisResult.hidden = false;
+                diagnosisResult.replaceChildren();
+
+                const message = document.createElement("p");
+                message.textContent =
+                    "Pilih setidaknya satu gejala yang terlihat sebelum melanjutkan.";
+
+                diagnosisResult.appendChild(message);
+                diagnosisResult.scrollIntoView({ behavior: "smooth" });
+                return;
+            }
+
+            // Membuat elemen HTML dengan aman melalui DOM.
+            // textContent dipakai agar masukan tidak dianggap sebagai HTML.
+            function addTextElement(parent, tag, text, className) {
+                const element = document.createElement(tag);
+                element.textContent = text;
+
+                if (className) {
+                    element.className = className;
+                }
+
+                parent.appendChild(element);
+                return element;
+            }
+
+            diagnosisResult.replaceChildren();
+            diagnosisResult.hidden = false;
+
+            addTextElement(
+                diagnosisResult,
+                "h3",
+                "Hasil Pemeriksaan Awal"
+            );
+
+            addTextElement(
+                diagnosisResult,
+                "p",
+                "Tanaman: " + crop +
+                " | Bagian: " + plantPart
+            );
+
+            // Bagian ini memberikan konteks berdasarkan luas gejala.
+            let spreadMessage = "";
+
+            if (spread === "satu") {
+                spreadMessage =
+                    "Gejala dilaporkan pada satu tanaman. Tetap amati tanaman di sekitarnya.";
+            } else if (spread === "beberapa") {
+                spreadMessage =
+                    "Beberapa tanaman terdampak. Periksa pola penyebaran dan kemungkinan faktor bersama.";
+            } else {
+                spreadMessage =
+                    "Gejala dilaporkan menyebar luas. Prioritaskan pemeriksaan lapangan dan konsultasi dengan tenaga kompeten.";
+            }
+
+            addTextElement(diagnosisResult, "p", spreadMessage);
+
+            addTextElement(
+                diagnosisResult,
+                "h4",
+                "Gejala yang dipilih"
+            );
+
+            const symptomList = document.createElement("ul");
+
+            selectedSymptoms.forEach(function (symptom) {
+                const guide = symptomGuides[symptom];
+
+                if (guide) {
+                    addTextElement(symptomList, "li", guide.title);
+                }
+            });
+
+            diagnosisResult.appendChild(symptomList);
+
+            addTextElement(
+                diagnosisResult,
+                "h4",
+                "Langkah pemeriksaan berikutnya"
+            );
+
+            const checkList = document.createElement("ul");
+
+            // Menggabungkan petunjuk dari gejala yang dipilih.
+            // Set digunakan agar saran yang sama tidak berulang.
+            const allChecks = new Set();
+
+            selectedSymptoms.forEach(function (symptom) {
+                const guide = symptomGuides[symptom];
+
+                if (guide) {
+                    guide.checks.forEach(function (check) {
+                        allChecks.add(check);
+                    });
+                }
+            });
+
+            allChecks.forEach(function (check) {
+                addTextElement(checkList, "li", check);
+            });
+
+            diagnosisResult.appendChild(checkList);
+
+            // Peringatan mencegah pengguna menganggap hasil
+            // formulir sebagai diagnosis penyakit yang pasti.
+            addTextElement(
+                diagnosisResult,
+                "p",
+                "Hasil ini belum menentukan penyakit atau penyebab spesifik. " +
+                "Pemeriksaan lanjutan diperlukan sebelum memilih pengendalian.",
+                "notice"
+            );
+
+            // Mengarahkan pengguna ke hasil setelah formulir dikirim.
+            diagnosisResult.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        });
+
+        // Menyembunyikan hasil dan mengosongkan pilihan saat reset.
+        document.getElementById("resetDiagnosis").addEventListener(
+            "click",
+            function () {
+                diagnosisResult.hidden = true;
+                diagnosisResult.replaceChildren();
+            }
+        );
+
+        /* ==================================================
+           3. PENCARIAN PUSTAKA
+           ================================================== */
+
+        const searchPlant = document.getElementById("searchPlant");
+        const libraryCards = document.querySelectorAll(".library-card");
+        const searchEmpty = document.getElementById("searchEmpty");
+
+        searchPlant.addEventListener("input", function () {
+            // Mengubah teks pencarian menjadi huruf kecil
+            // agar pencarian tidak membedakan huruf besar/kecil.
+            const keyword = searchPlant.value.trim().toLowerCase();
+            let visibleCount = 0;
+
+            libraryCards.forEach(function (card) {
+                const searchableText =
+                    card.dataset.search.toLowerCase();
+
+                const matches = searchableText.includes(keyword);
+
+                card.hidden = !matches;
+
+                if (matches) {
+                    visibleCount++;
+                }
+            });
+
+            // Pesan muncul jika tidak ada kartu yang cocok.
+            searchEmpty.hidden = visibleCount !== 0;
+        });
+
+        /* ==================================================
+           4. BUKU HARIAN KEBUN
+           ================================================== */
+
+        const diaryForm = document.getElementById("diaryForm");
+        const diaryList = document.getElementById("diaryList");
+        const exportDiaryButton = document.getElementById("exportDiary");
+
+        const DIARY_STORAGE_KEY = "taniSiagaDiaryV1";
+
+        // Mengambil catatan dari localStorage.
+        // Jika belum ada data atau formatnya rusak, gunakan array kosong.
+        function loadDiary() {
+            try {
+                const savedData = localStorage.getItem(DIARY_STORAGE_KEY);
+
+                if (!savedData) {
+                    return [];
+                }
+
+                const parsedData = JSON.parse(savedData);
+
+                // Memastikan data yang dibaca berbentuk array.
+                return Array.isArray(parsedData) ? parsedData : [];
+            } catch (error) {
+                return [];
+            }
+        }
+
+        let diaryEntries = loadDiary();
+
+        // Menyimpan catatan ke browser.
+        function saveDiary() {
+            try {
+                localStorage.setItem(
+                    DIARY_STORAGE_KEY,
+                    JSON.stringify(diaryEntries)
+                );
+                return true;
+            } catch (error) {
+                alert(
+                    "Catatan tidak dapat disimpan. Periksa ruang penyimpanan browser."
+                );
+                return false;
+            }
+        }
+
+        // Menampilkan semua catatan di halaman.
+        function renderDiary() {
+            diaryList.replaceChildren();
+
+            if (diaryEntries.length === 0) {
+                addEmptyMessage();
+                return;
+            }
+
+            // Catatan terbaru ditampilkan lebih dahulu.
+            const newestFirst = [...diaryEntries].reverse();
+
+            newestFirst.forEach(function (entry) {
+                const article = document.createElement("article");
+                article.className = "diary-entry";
+
+                const heading = document.createElement("h4");
+                heading.textContent = entry.crop;
+                article.appendChild(heading);
+
+                const date = document.createElement("p");
+                date.className = "diary-meta";
+                date.textContent = "Tanggal: " + entry.date;
+                article.appendChild(date);
+
+                const condition = document.createElement("p");
+                condition.textContent =
+                    "Kondisi: " + entry.condition;
+                article.appendChild(condition);
+
+                const action = document.createElement("p");
+                action.textContent =
+                    "Tindakan: " + entry.action;
+                article.appendChild(action);
+
+                // Tombol menghapus satu catatan berdasarkan ID.
+                const deleteButton = document.createElement("button");
+                deleteButton.type = "button";
+                deleteButton.className =
+                    "btn btn-secondary btn-small";
+                deleteButton.textContent = "Hapus catatan";
+
+                deleteButton.addEventListener("click", function () {
+                    const confirmed = confirm(
+                        "Yakin ingin menghapus catatan ini?"
+                    );
+
+                    if (!confirmed) {
+                        return;
+                    }
+
+                    diaryEntries = diaryEntries.filter(function (item) {
+                        return item.id !== entry.id;
+                    });
+
+                    if (saveDiary()) {
+                        renderDiary();
+                    }
+                });
+
+                article.appendChild(deleteButton);
+                diaryList.appendChild(article);
+            });
+        }
+
+        // Pesan yang muncul saat belum ada catatan.
+        function addEmptyMessage() {
+            const message = document.createElement("div");
+            message.className = "empty-state";
+            message.textContent =
+                "Belum ada catatan. Mulai dengan menambahkan pengamatan pertama.";
+            diaryList.appendChild(message);
+        }
+
+        // Menambahkan catatan baru dari formulir.
+        diaryForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const newEntry = {
+                id: Date.now().toString(),
+                date: document.getElementById("diaryDate").value,
+                crop: document.getElementById("diaryCrop").value,
+                condition: document.getElementById("diaryCondition").value.trim(),
+                action: document.getElementById("diaryAction").value.trim()
+            };
+
+            diaryEntries.push(newEntry);
+
+            // Jika gagal disimpan, batalkan perubahan pada tampilan.
+            if (!saveDiary()) {
+                diaryEntries.pop();
+                return;
+            }
+
+            renderDiary();
+
+            // Bersihkan kolom catatan, tetapi pertahankan tanggal.
+            document.getElementById("diaryCondition").value = "";
+            document.getElementById("diaryAction").value = "";
+
+            alert("Catatan kebun berhasil disimpan di browser ini.");
+        });
+
+        // Mengekspor catatan menjadi file CSV yang bisa dibuka di Excel.
+        exportDiaryButton.addEventListener("click", function () {
+            if (diaryEntries.length === 0) {
+                alert("Belum ada catatan untuk diekspor.");
+                return;
+            }
+
+            // Mengapit teks dengan tanda kutip dan menggandakan
+            // tanda kutip di dalam teks agar format CSV tetap benar.
+            function escapeCSV(value) {
+                return '"' +
+                    String(value).replace(/"/g, '""') +
+                    '"';
+            }
+
+            const headers = [
+                "Tanggal",
+                "Jenis Tanaman",
+                "Kondisi",
+                "Tindakan"
+            ];
+
+            const rows = diaryEntries.map(function (entry) {
+                return [
+                    entry.date,
+                    entry.crop,
+                    entry.condition,
+                    entry.action
+                ];
+            });
+
+            const csvContent = [
+                headers,
+                ...rows
+            ].map(function (row) {
+                return row.map(escapeCSV).join(",");
+            }).join("\r\n");
+
+            // BOM membantu Excel mengenali teks UTF-8.
+            const blob = new Blob(
+                ["\uFEFF" + csvContent],
+                { type: "text/csv;charset=utf-8;" }
+            );
+
+            const url = URL.createObjectURL(blob);
+            const downloadLink = document.createElement("a");
+
+            downloadLink.href = url;
+            downloadLink.download = "catatan-kebun.csv";
+
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            downloadLink.remove();
+
+            // Membersihkan URL sementara setelah file dibuat.
+            URL.revokeObjectURL(url);
+        });
+
+        // Tampilkan catatan yang tersimpan ketika halaman dibuka.
+        renderDiary();
+
+        /* ==================================================
+           5. KALKULATOR BIAYA
+           ================================================== */
+
+        const costForm = document.getElementById("costForm");
+        const costResult = document.getElementById("costResult");
+
+        // Format angka menjadi mata uang Rupiah.
+        const rupiahFormatter = new Intl.NumberFormat("id-ID", {
+            style: "currency",
+            currency: "IDR",
+            maximumFractionDigits: 0
+        });
+
+        costForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            // Membaca angka dari setiap kolom.
+            const seedCost = Number(
+                document.getElementById("seedCost").value
+            );
+
+            const fertilizerCost = Number(
+                document.getElementById("fertilizerCost").value
+            );
+
+            const careCost = Number(
+                document.getElementById("careCost").value
+            );
+
+            const values = [
+                seedCost,
+                fertilizerCost,
+                careCost
+            ];
+
+            // Validasi untuk mencegah angka negatif atau tidak valid.
+            const validValues = values.every(function (value) {
+                return Number.isFinite(value) && value >= 0;
+            });
+
+            if (!validValues) {
+                alert("Masukkan angka biaya yang valid.");
+                return;
+            }
+
+            // Menjumlahkan seluruh kategori biaya.
+            const totalCost =
+                seedCost + fertilizerCost + careCost;
+
+            costResult.replaceChildren();
+
+            const label = document.createElement("span");
+            label.textContent = "Total biaya perawatan";
+            costResult.appendChild(label);
+
+            const total = document.createElement("strong");
+            total.textContent = rupiahFormatter.format(totalCost);
+            costResult.appendChild(total);
+
+            const explanation = document.createElement("p");
+            explanation.textContent =
+                "Total dihitung dari tiga kategori biaya yang kamu masukkan.";
+            costResult.appendChild(explanation);
+        });
+
+    </script>
+
+</body>
+</html>
